@@ -134,7 +134,7 @@ resource "null_resource" "vm_node_init" {
     destination = "/tmp/"
     connection {
       type = "ssh"
-      host = "${local.appvmip}" 
+      host = "${vsphere_virtual_machine.vm_deploy[count.index].default_ip_address}"
       user = "root"
       password = "${local.root_password}"
       port = "22"
@@ -149,7 +149,7 @@ resource "null_resource" "vm_node_init" {
     ]
     connection {
       type = "ssh"
-      host = "${local.appvmip}" 
+      host = "${vsphere_virtual_machine.vm_deploy[count.index].default_ip_address}" 
       user = "root"
       password = "${local.root_password}"
       port = "22"
