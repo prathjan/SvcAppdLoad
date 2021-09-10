@@ -28,6 +28,9 @@ variable "globalwsname" {
   type = string
 }
 
+variable "trigcount" {
+  type = string
+}
 
 
 # Configure the VMware vSphere Provider
@@ -124,7 +127,7 @@ resource "vsphere_virtual_machine" "vm_deploy" {
 
 resource "null_resource" "vm_node_init" {
   triggers = {
-	trig = local.trigcount
+	trig = var.trigcount
   }
   provisioner "file" {
     source = "scripts/"
