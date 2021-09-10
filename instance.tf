@@ -29,10 +29,6 @@ variable "globalwsname" {
 }
 
 
-locals {
-  appport = data.terraform_remote_state.global.outputs.appport
-  appvmip = data.terraform_remote_state.appvm.outputs.vm_ip[0]
-}
 
 # Configure the VMware vSphere Provider
 provider "vsphere" {
@@ -160,13 +156,6 @@ resource "null_resource" "vm_node_init" {
 
 }
 
-output "vm_name" {
-  value = vsphere_virtual_machine.vm_deploy.*.name
-}
-
-output "vm_ip" {
-  value = vsphere_virtual_machine.vm_deploy.*.default_ip_address
-}
 
 locals {
   appvmip = data.terraform_remote_state.appvm.outputs.vm_ip[0]
